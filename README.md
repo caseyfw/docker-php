@@ -1,4 +1,4 @@
-# caseyfw/docker-php-alpine
+# caseyfw/php-alpine
 
 Fork of k0st/alpine-apache-app.
 
