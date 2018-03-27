@@ -6,7 +6,7 @@ curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin
 mkdir -p /code/web && chown -R apache:apache /code && \
 sed -i 's#^DocumentRoot ".*#DocumentRoot "/code/web"#g' /etc/apache2/httpd.conf && \
 sed -i 's#^<Directory ".*htdocs.*#<Directory "/code/web">#' /etc/apache2/httpd.conf && \
-sed -i 's/AllowOverride none/AllowOverride All/' /etc/apache2/httpd.conf && \
+sed -i 's/AllowOverride [Nn]one/AllowOverride All/' /etc/apache2/httpd.conf && \
 sed -i 's/Require all denied/Require all granted/' /etc/apache2/httpd.conf && \
 sed -i 's#logs/.*\.log#/dev/stdout#g' /etc/apache2/httpd.conf && \
 echo 'Alias "${WEB_PATH}" /web' >> /etc/apache2/httpd.conf && \
