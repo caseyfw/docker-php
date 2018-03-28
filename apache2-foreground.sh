@@ -7,5 +7,4 @@ if [ -e /code/setup.sh ]; then
 fi
 
 echo "[i] Starting apache..."
-# Run apache httpd daemon.
 httpd -D FOREGROUND

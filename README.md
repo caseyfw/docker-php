@@ -1,4 +1,4 @@
-# caseyfw/php-alpine
+# caseyfw/php
 
 Fork of k0st/alpine-apache-app.
 
@@ -10,13 +10,33 @@ designed to work with modern PHP frameworks like Symfony, Laravel and Drupal.
 Either copy or volume your code into `/code` when running - e.g.
 
 ```
-docker run --detach --volume ${PWD}:/code caseyfw/php-alpine
+docker run --volume ${PWD}:/code --publish 80:80 caseyfw/php
 ```
 
 ## Web root
 
 It is expected that there will be a `web/` directory in the root level of your
 code. This is served by apache as the web root.
+
+If you want to put your code straight into the webroot, just volume it into the
+`/web` directory - e.g.
+
+```
+docker run -v ${PWD}:/web -p 80:80 caseyfw/php
+```
+
+This is useful for frameworks using legacy scaffolds like Drupal and Wordpress.
+
+## Changing the web path
+
+The `$WEB_PATH` environment variable can be used to set the sub-path your
+web root is served from. This should start with a slash - e.g. `/foo/bar`.
+
+```
+docker run -v ${PWD}:/code -p 80:80 -e "WEB_PATH=/foo/bar" caseyfw/php
+```
+
+This will result in your content being served at http://localhost/foo/bar/.
 
 ## Project script
 
