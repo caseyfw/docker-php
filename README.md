@@ -10,7 +10,7 @@ designed to work with modern PHP frameworks like Symfony, Laravel and Drupal.
 Either copy or volume your code into `/code` when running - e.g.
 
 ```
-docker run --volume ${PWD}:/code --publish 80:80 caseyfw/php
+docker run --volume ${PWD}:/code --publish 80:8080 caseyfw/php
 ```
 
 ## Web root
@@ -22,7 +22,7 @@ If you want to put your code straight into the webroot, just volume it into the
 `/web` directory - e.g.
 
 ```
-docker run -v ${PWD}:/web -p 80:80 caseyfw/php
+docker run -v ${PWD}:/web -p 80:8080 caseyfw/php
 ```
 
 This is useful for frameworks using legacy scaffolds like Drupal and Wordpress.
@@ -33,7 +33,7 @@ The `$WEB_PATH` environment variable can be used to set the sub-path your
 web root is served from. This should start with a slash - e.g. `/foo/bar`.
 
 ```
-docker run -v ${PWD}:/code -p 80:80 -e "WEB_PATH=/foo/bar" caseyfw/php
+docker run -v ${PWD}:/code -p 80:8080 -e "WEB_PATH=/foo/bar" caseyfw/php
 ```
 
 This will result in your content being served at http://localhost/foo/bar/.
@@ -48,3 +48,12 @@ ownership of project directories that the web server needs to write to - e.g.
 #!/bin/sh
 chown -R apache:apache /code/var/*
 ```
+
+## Running as unprivileged user
+Note that this image uses port 8080 by default, allowing it to be run by a
+non-root user.
+
+```
+docker run -v ${PWD}:/code -p 80:8080 -u 1000 caseyfw/php
+```
+
